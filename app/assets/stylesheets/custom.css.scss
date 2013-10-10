@@ -1,0 +1,23 @@
+// $navbarBackground:            #000000;
+$font-family-sans-serif: 'メイリオ', Meiryo, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$navbarText: #FFFFFF;
+$body-bg: #FCF8F7;
+$navbar-default-bg: #A7C4E2;
+$navbar-default-color: #FCFAF7;
+$navbar-default-link-color: #FCFAF7;
+$navbar-default-link-hover-color: #FCFAF7;
+
+@import "bootstrap";
+
+body { 
+  padding-top: 70px; 
+}
+
+.field_with_errors {
+  @extend .form-group;
+  @extend .has-error;
+}
+
+.alert-notice {
+  @extend .alert-info;
+}

@@ -1,0 +1,17 @@
+<% p = post %>
+<h3><%= p.title %></h3>
+<span class="pull-right"><%= post.user.name %> <%= content_tag(:span, p.updated_at.strftime("%m\/%d %H:%M"), class: "label label-info") %></span>
+<hr />
+<div class="row">
+  <div class="col-sm-7">
+    <div class="well"><%= p.body %></div>
+  </div>
+  
+  <div class="col-sm-5">
+    <ul class="list-group">
+      <li class="list-group-item">数量<%= p.quantity %><%= p.unit %></li>
+      <li class="list-group-item">金額<%= p.amount %></li>
+      <li class="list-group-item">場所<%= p.place %></li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <title>Holmon</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true, debug: true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true, debug: true %>
+  <%= csrf_meta_tags %>
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="container">
+    <%= render 'layouts/header' %>
+    <div class="row">
+      <div id="notice" class="pull-right"><%= render partial: "shared/flash" %></div>
+      <div class="col-sm-4">
+        <%= render 'layouts/sidebar' %>
+      </div>
+      <div class="col-sm-8">
+        <%= yield %>  
+      </div>
+    </div>
+    <div id="debug-info"><%= debug(params) %></div>
+    <%= render 'layouts/footer' %>
+  </div>
+  
+</body>
+</html>

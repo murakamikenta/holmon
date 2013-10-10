@@ -1,0 +1,43 @@
+<header>
+  <nav class="navbar navbar-default navbar-fixed-top"  role="navigation">
+    <div class="container">
+      
+      <div class="navbar-header navbar-inner">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <%= link_to "Holmon", root_path, class: "navbar-brand" %>
+      </div>
+      
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <% if signed_in? %>
+            <li><%= link_to gravatar_for(current_user, size: 20), current_user  %></li>
+          <% end %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <% if signed_in? %>
+                <%= current_user.name %>
+              <% else %>
+                スタート
+              <% end %> 
+              <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <% if signed_in? %>
+                <li><%= link_to "サインアウト", signout_path, method: "delete" %></li>
+              <% else %>
+                <li><%= link_to "サインイン", signin_path %></li>
+                <li><%= link_to "新規登録", signup_path %></li>
+              <% end %>
+            </ul>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+      
+    </div>
+  </nav>
+</header>
