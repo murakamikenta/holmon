@@ -1,0 +1,10 @@
+<h1>
+  <%= gravatar_for @post.user %> <%= @post.title %>  
+</h1>
+<hr />
+<div class="well">
+  <%= @post.body %>
+</div>
+<ul class="list-group">
+  <li class="list-group-item"><%= @post.price %>円</li>
+</ul>

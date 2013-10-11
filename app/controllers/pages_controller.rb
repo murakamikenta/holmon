@@ -2,7 +2,8 @@ class PagesController < ApplicationController
   before_action :set_post
   
   def home
-    @posts = Post.all
+    @posts = Post.default
+    @comment = Comment.new
   end
 
   def devel

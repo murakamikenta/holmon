@@ -1,0 +1,33 @@
+<h1>
+  <%= gravatar_for @post.user %> <%= @post.title %>  
+</h1>
+<hr />
+<% if @post.closed_at %>
+  <div class="alert alert-danger">
+    終了しました：<%= @post.closed_at.strftime("%m\/%d %H:%M") %>
+  </div>
+<% end %>
+<div class="well">
+  <%= @post.body %>
+</div>
+<ul class="list-group">
+  <li class="list-group-item"><%= @post.price %>円</li>
+</ul>
+
+<h2>コメント</h2>
+<ul class="list-group">
+  <%= render partial: "comments/comment", collection: @comments %>
+</ul>
+
+<% if signed_in? %>
+  <%= form_for(@comment, url: user_post_comments_path(current_user, @post)) do |f| %>
+    <%= render "comments/fields", f: f %>
+    <div class="form-group pull-right">
+      <%= gravatar_for current_user, size: 30 %>
+      <%= f.submit "コメント", class: "btn btn-sm btn-primary" %>
+      <% if current_user == @post.user %>
+        <span id="btn-close<%= @post.id %>"><%= render "posts/close", p: @post  %></span>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

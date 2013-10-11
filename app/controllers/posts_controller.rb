@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :close]
     
   def index
     @posts = Post.all
@@ -21,6 +21,8 @@ class PostsController < ApplicationController
   end
 
   def show
+    @comments = @post.comments.created_order
+    @comment = Comment.new
   end
 
   def edit
@@ -32,6 +34,20 @@ class PostsController < ApplicationController
       redirect_to root_url
     else
       render 'edit'
+    end
+  end
+  
+  def destroy
+    @post.destroy
+    flash[:success] = "投稿を削除しました"
+    redirect_to root_url
+  end
+  
+  def close
+    if @post.closed_at
+      @post.update_attribute(:closed_at, nil)
+    else
+      @post.update_attribute(:closed_at, Time.now)
     end
   end
   

@@ -5,11 +5,10 @@ Holmon::Application.routes.draw do
   end
   
   resources :users do
-    resources :posts
-  end
-  
-  resources :posts, only: [:index] do
-    resources :comments
+    resources :posts do
+      patch "close" => :close, on: :member
+      resources :comments
+    end
   end
   
   resources :sessions, only: [:new, :create, :destroy]  

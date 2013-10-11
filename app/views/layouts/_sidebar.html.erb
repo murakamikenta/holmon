@@ -1,50 +1,22 @@
 <div class="sidebar">
-  
   <% if signed_in? && controller.controller_name == "pages" %>
     <%= form_for(@post, url: user_posts_path(current_user)) do |f| %>
-      <div class="form-group">
-        <%= f.label :title, "タイトル" %>
-        <%= f.text_field :title, class: "form-control", placeholder: "余ったトマト要りませんか？（美作市）" %>
-      </div>
       
-      <div class="form-group">
-        <%= f.label :body, "内容" %>
-        <%= f.text_area :body, class: "form-control", placeholder: "補足事項" %>
-      </div>
-      
-      <div class="form-group">
-        <div class="row">
-          <div class="col-sm-6">
-            <%= f.label :quantity, "数量" %>
-            <%= f.number_field :quantity, class: "form-control", maxlength: 10 %>
-          </div>
-          <div class="col-sm-6">
-            <%= f.label :unit, "単位" %>
-            <%= f.text_field :unit, class: "form-control" %>
-          </div>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <%= f.label :price, "金額" %>
-        <%= f.number_field :price, class: "form-control", maxlength: 10 %>
-        <span class="help-block pull-right">無料の場合は0</span>
-      </div>
-      <div class="form-group">
-        <%= f.label :place, "場所" %>
-        <%= f.text_field :place, class: "form-control", placeholder: "自宅引取" %>
-      </div>
-      
+      <%= render "posts/fields", f: f %>
       <div class="form-group">
         <%= f.submit "POST", class: "btn btn-sm btn-primary" %>
       </div>
     <% end %>
   <% end %>
-  
+  <p>
+    ここに自分の投稿リストと、自分がコメントした投稿リストを直近５件表示
+  </p>
   <ul class="nav">
     <li><%= link_to "ホーム", root_path %></li>
     <li><%= link_to "API", pages_api_path %></li>
     <li><%= link_to "Development", pages_devel_path %></li>
     <li><%= link_to "routes", "#{root_path}rails/info/routes", target: "_blank" %></li>
+    <li><%= link_to "Livlis", "http://www.livlis.com/", target: "_blank" %></li>
+    
   </ul>
 </div>

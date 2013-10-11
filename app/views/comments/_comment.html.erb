@@ -1,0 +1,15 @@
+<% c = comment %>
+<li class="list-group-item">
+  <%= c.body %>
+  <span class="pull-right">
+    
+    <%= gravatar_for c.user, size: 20 %>
+    <%= c.user.name %>
+    <%= content_tag(:span, c.updated_at.strftime("%m\/%d %H:%M"), class: "text-muted") %>
+    <% if current_user == c.user %>
+      <%= link_to "編集", edit_user_post_comment_path(c.user, c.post, c), class: "text-muted" %>
+      <%= link_to "削除", user_post_comment_path(c.user, c.post, c), method: "DELETE", class: "text-muted", data: { confirm: "削除しますか?" } %>
+    <% end %>
+  </span>
+  
+</li>

@@ -39,8 +39,9 @@ ActiveRecord::Schema.define(version: 1) do
     t.string   "category",    limit: 140
     t.integer  "category_id",             default: 0
     t.text     "remarks"
-    t.string   "image"
+    t.binary   "image"
     t.string   "url"
+    t.datetime "closed_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -63,7 +64,7 @@ ActiveRecord::Schema.define(version: 1) do
     t.string   "facebook"
     t.string   "twitter"
     t.integer  "reputation"
-    t.string   "image"
+    t.binary   "image"
     t.string   "facebook_id"
     t.string   "twitter_id"
     t.datetime "created_at"
@@ -74,6 +75,7 @@ ActiveRecord::Schema.define(version: 1) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["facebook_id"], name: "index_users_on_facebook_id"
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+  add_index "users", ["tel"], name: "index_users_on_tel", unique: true
   add_index "users", ["twitter_id"], name: "index_users_on_twitter_id"
 
 end

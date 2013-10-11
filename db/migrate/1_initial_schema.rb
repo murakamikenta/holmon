@@ -12,8 +12,9 @@ class InitialSchema < ActiveRecord::Migration
       t.string :category,    limit: 140
       t.integer :category_id, default: 0
       t.text :remarks
-      t.string :image
+      t.binary :image
       t.string :url
+      t.datetime :closed_at
       
       t.timestamps
     end
@@ -51,10 +52,12 @@ class InitialSchema < ActiveRecord::Migration
       t.string :image
       t.string :facebook_id
       t.string :twitter_id
+      t.binary :image
       
       t.timestamps
     end
     add_index :users, :email, unique: true
+    add_index :users, :tel, unique: true
     add_index :users, :remember_token
     add_index :users, :access_token
     add_index :users, :facebook_id

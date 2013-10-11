@@ -1,0 +1,5 @@
+<% if p.closed_at %>
+    <%= link_to "再開", close_user_post_path(p.user, p), method: "PATCH", class: "btn btn-sm btn-warning", remote: true %>
+<% else %>
+    <%= link_to "終了", close_user_post_path(p.user, p), method: "PATCH", class: "btn btn-sm btn-danger", remote: true %>
+<% end %>

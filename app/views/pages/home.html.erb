@@ -3,16 +3,18 @@
 
 <% else %>
   <div class="jumbotron">    
-    <h1>Holmon <%= link_to "新規登録", signup_path, class: "btn btn-lg btn-primary" %></h1>
+    <h1>Holmon</h1>
     <%= link_to "Github Source", "https://github.com/kntmrkm/holmon", class: "btn btn-default", target: "_blank" %>
     <%= link_to "on heroku", "https://holmon.herokuapp.com", class: "btn btn-default", target: "_blank" %>
     <%= link_to "設計文書（暫定）", "https://docs.google.com/document/d/1W7V340_0sDMzhJX0FBvgrTepctcHVhVjvivD_idPYSA/edit?usp=sharing", class: "btn btn-default", target: "_blank" %>
     
-    <p>テストとして下記のユーザでサインインできます。
+    <p>
       <ul class="nav">
         <li>デモユーザ：demo@holmon.jp/demo</li>
       </ul>
     </p>
+    <%= link_to "新規登録", signup_path, class: "btn btn-lg btn-primary" %>
+    <%= link_to "サインイン", signin_path, class: "btn btn-lg btn-primary" %>
   </div>
 <% end %>
 <% if @posts %>
