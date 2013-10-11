@@ -19,8 +19,9 @@
         終了しました：<%= p.closed_at.strftime("%m\/%d %H:%M") %>
       </div>
     <% else %>
+      <%= image_tag image_user_post_path(p.user, p), class: "img-rounded" %>
+      <hr />
       <div class="well"><%= p.body %></div>
-      
     <% end %>
     
   </div>

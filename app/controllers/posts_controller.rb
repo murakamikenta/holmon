@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :close]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :close, :image]
     
   def index
     @posts = Post.all
@@ -51,10 +51,14 @@ class PostsController < ApplicationController
     end
   end
   
+  def image
+    send_data(@post.image)
+  end
+  
   private
     def post_params
       params.require(:post).permit(:user_id, :title, :body, :quantity, :unit, :price,
-        :amount, :place, :category, :category_id, :remarks, :image, :url)
+        :amount, :place, :category, :category_id, :remarks, :image, :image_file, :url)
     end
   
     def set_post

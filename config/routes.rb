@@ -6,6 +6,7 @@ Holmon::Application.routes.draw do
   
   resources :users do
     resources :posts do
+      get "image" => :image, on: :member
       patch "close" => :close, on: :member
       resources :comments
     end
