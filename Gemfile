@@ -5,7 +5,7 @@ gem 'rails', '4.0.0'
 
 gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
 gem 'jquery-rails'
-
+gem 'faker'
 gem 'jbuilder', '~> 1.2'
 gem 'kaminari'
 gem 'bcrypt-ruby' , '~> 3.0.0'
@@ -23,7 +23,6 @@ group :development, :test do
   gem 'guard-spork'
   gem 'childprocess' # for spork
   gem 'sqlite3'
-  gem 'faker'
   gem 'better_errors'
   
 end
