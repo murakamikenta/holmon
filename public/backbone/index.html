@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <title>Holmon Backbone</title>
+  <link rel="stylesheet" href="./lib/css/bootstrap.min.css" media="screen">
+  <link rel="stylesheet" href="./css/backbone.css" type="text/css" />
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="container">
+    <h1>Backbone Example</h1>
+    
+  
+    <form accept-charset="UTF-8" action="../api/users" class="new_user" id="new_user" method="post">
+        <label for="user_name">Name</label>
+        <input class="form-control" id="user_name" name="user[name]" type="text" /><br />
+       
+        <label for="user_email">Email</label>
+        <input class="form-control" id="user_email" name="user[email]" type="text" /><br />
+        
+        <label for="user_password">Password</label>
+        <input class="form-control" id="user_password" name="user[password]" type="password" /><br />
+        
+        <label for="user_password_confirmation">Confirmation</label>
+        <input class="form-control" id="user_password_confirmation" name="user[password_confirmation]" type="password" /><br />
+        
+        <input class="btn btn-lg btn-primary" name="commit" type="submit" value="ユーザを作成する" />
+    </form>
+    
+
+    
+    <h3>Holmon JSON API</h3>
+    <ul>
+      <li><a href="../api/users_list">ユーザリスト</a></li>
+    </ul>
+    
+  </div>
+  <script src="./lib/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+  <script src="./lib/js/bootstrap.min.js"></script>
+  <script src="./lib/js/json2.js" type="text/javascript"></script>
+  <script src="./lib/js/underscore-min.1.5.2.js" type="text/javascript"></script>
+  <script src="./lib/js/backbone1.1.0.js" type="text/javascript"></script>
+  <script src="./js/app.js" type="text/javascript"></script>
+</body>
+</html>

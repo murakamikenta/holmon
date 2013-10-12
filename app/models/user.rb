@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
   before_create :create_remember_token
+  before_create :create_access_token
+  
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   
@@ -16,6 +18,10 @@ class User < ActiveRecord::Base
     SecureRandom.urlsafe_base64
   end
   
+  def User.new_access_token
+    SecureRandom.urlsafe_base64
+  end
+  
   def User.encrypt(token)
     Digest::SHA1.hexdigest(token.to_s)
   end
@@ -24,6 +30,9 @@ class User < ActiveRecord::Base
     def create_remember_token
       self.remember_token = User.encrypt(User.new_remember_token)
     end
-  
+    
+    def create_access_token
+      self.access_token = User.encrypt(User.new_access_token)
+    end
     
 end
