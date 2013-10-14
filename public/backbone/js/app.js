@@ -26,4 +26,4 @@
     console.log("Staff[" + tmpStaff.cid + "]: " + JSON.stringify(tmpStaff));
     
     var tmpStaff2 = new Staff({ name: "Kenta", age: 30, id: 102});
-}());
+})();
