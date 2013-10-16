@@ -7,22 +7,18 @@ class Api::PostsController < Api::ApplicationController
 
   def new
     @post = Post.new
-    
   end
 
   def create
-    @post = current_user.posts.build(post_params)
+    @post = User.find(params[:user_id]).posts.build(post_params)
     if @post.save
-      flash[:success] = "投稿しました"
-      redirect_to root_url
+      render action: 'show', status: :created, location: api_user_post_url(params[:user_id], @post)
     else
-      render 'new'
+      render json: @post.errors, status: :unprocessable_entity
     end
   end
 
   def show
-    @comments = @post.comments.created_order
-    @comment = Comment.new
   end
 
   def edit
@@ -30,17 +26,15 @@ class Api::PostsController < Api::ApplicationController
 
   def update
     if @post.update_attributes(post_params)
-      flash[:success] = "投稿を更新しました"
-      redirect_to root_url
+      render action: 'show', status: :created, location: @post
     else
-      render 'edit'
+      render json: @post.errors, status: :unprocessable_entity
     end
   end
   
   def destroy
     @post.destroy
-    flash[:success] = "投稿を削除しました"
-    redirect_to root_url
+    head :no_content
   end
   
   def close
