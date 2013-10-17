@@ -42,8 +42,8 @@ class InitialSchema < ActiveRecord::Migration
       t.text :description
       t.string :tel,    limit: 20
       t.string :password_digest
-      t.string :remember_token
-      t.string :access_token
+      t.string :remember_token,              null: false
+      t.string :access_token,              null: false
       t.text :address
       t.string :url
       t.string :facebook

@@ -1,5 +1,7 @@
 class Api::PostsController < Api::ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy, :close, :image]
+  before_action :authenticate_user, only: [:create]
+  #before_action :basic_auth, only: [:create]
     
   def index
     @posts = Post.all
@@ -10,9 +12,9 @@ class Api::PostsController < Api::ApplicationController
   end
 
   def create
-    @post = User.find(params[:user_id]).posts.build(post_params)
+    @post = User.find(1).posts.build(post_params)
     if @post.save
-      render action: 'show', status: :created, location: api_user_post_url(params[:user_id], @post)
+      render action: 'show', status: :created, location: api_post_url(@post)
     else
       render json: @post.errors, status: :unprocessable_entity
     end
@@ -57,5 +59,13 @@ class Api::PostsController < Api::ApplicationController
   
     def set_post
       @post = Post.find(params[:id])
+    end
+    
+    def basic_auth
+      authenticate_or_request_with_http_basic do |user, pass|
+        logger.info "request.headers: #{request.headers['Authorization']}"
+        return if User.find_by(accee_token: user)
+        false
+      end
     end
 end

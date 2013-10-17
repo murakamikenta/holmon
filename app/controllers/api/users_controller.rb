@@ -1,5 +1,6 @@
 class Api::UsersController < Api::ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :basic_auth
   
   def index
     @users = User.all
@@ -47,5 +48,6 @@ class Api::UsersController < Api::ApplicationController
     def set_user
       @user = User.find(params[:id])
     end
+   
   
 end

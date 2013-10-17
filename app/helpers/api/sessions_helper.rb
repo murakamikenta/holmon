@@ -1,6 +1,6 @@
 module Api::SessionsHelper
   def sign_in(user)
-    access_token = User.new_access_token
+    access_token = User.new_token
     cookies.permanent[:access_token] = access_token
     user.update_attribute(:access_token, User.encrypt(access_token))
     self.current_user = user
@@ -30,5 +30,7 @@ module Api::SessionsHelper
     self.current_user = nil
     cookies.delete(:access_token)
   end
+  
+  
     
 end

@@ -20,7 +20,7 @@
 </ul>
 
 <% if signed_in? %>
-  <%= form_for(@comment, url: user_post_comments_path(current_user, @post)) do |f| %>
+  <%= form_for(@comment, url: post_comments_path(@post)) do |f| %>
     <%= render "comments/fields", f: f %>
     <div class="form-group pull-right">
       <%= gravatar_for current_user, size: 30 %>

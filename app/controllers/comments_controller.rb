@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
-  before_action :set_post, only: [:new, :edit, :create, :update]
+  before_action :set_post, only: [:new, :create]
     
   def index
     @comments = Comment.all
@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
       
     if @comment.save
       flash[:success] = "コメントしました"
-      redirect_to user_post_url(@comment.post.user, @comment.post)
+      redirect_to post_url(@comment.post)
     else
       render 'new'
     end
@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
   def update
     if @comment.update_attributes(comment_params)
       flash[:success] = "コメントを更新しました"
-      redirect_to user_post_url(@comment.post.user, @comment.post)
+      redirect_to post_url(@comment.post)
     else
       render 'edit'
     end
@@ -41,7 +41,7 @@ class CommentsController < ApplicationController
     @post = @comment.post
     @comment.destroy
     flash[:success] = "コメントを削除しました"
-    redirect_to user_post_url(@post.user, @post)
+    redirect_to post_url(@post)
   end
   
   private

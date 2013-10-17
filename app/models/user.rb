@@ -14,11 +14,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   validates :password, length: { minimum: 2 }
     
-  def User.new_remember_token
-    SecureRandom.urlsafe_base64
-  end
-  
-  def User.new_access_token
+  def User.new_token
     SecureRandom.urlsafe_base64
   end
   
@@ -28,11 +24,11 @@ class User < ActiveRecord::Base
     
   private
     def create_remember_token
-      self.remember_token = User.encrypt(User.new_remember_token)
+      self.remember_token = User.encrypt(User.new_token)
     end
     
     def create_access_token
-      self.access_token = User.encrypt(User.new_access_token)
+      self.access_token = User.encrypt(User.new_token)
     end
     
 end

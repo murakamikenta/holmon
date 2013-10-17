@@ -1,13 +1,13 @@
 <% p = post %>
 
-<h4><%= content_tag(:span, "", class: "glyphicon glyphicon-bookmark") %> <%= link_to p.title, user_post_path(p.user, p) %></h4>
+<h4><%= content_tag(:span, "", class: "glyphicon glyphicon-bookmark") %> <%= link_to p.title, post_path(p) %></h4>
 <span class="pull-right">
   <span class="label label-info"><%= content_tag(:span, "", class: "glyphicon glyphicon-map-marker") %> <%= p.place %></span>
   <span class="label label-default"><%= content_tag(:span, "", class: "glyphicon glyphicon-time") %> <%= p.updated_at.strftime("%m\/%d %H:%M") %></span>
   
   <% if current_user == p.user %>
-    <%= link_to "編集", edit_user_post_path(current_user, p), class: "text-muted" %>
-    <%= link_to "削除", user_post_path(current_user, p), method: "DELETE", class: "text-muted", data: { confirm: "削除しますか?" } %>
+    <%= link_to "編集", edit_post_path(p), class: "text-muted" %>
+    <%= link_to "削除", post_path(p), method: "DELETE", class: "text-muted", data: { confirm: "削除しますか?" } %>
   <% end %>
 </span>
 <hr />
@@ -19,7 +19,7 @@
         終了しました：<%= p.closed_at.strftime("%m\/%d %H:%M") %>
       </div>
     <% else %>
-      <%= image_tag image_user_post_path(p.user, p), class: "img-rounded img-responsive" %>
+      <%= image_tag image_post_path(p), class: "img-rounded img-responsive" %>
       <hr />
       <div class="well"><%= p.body %></div>
     <% end %>
@@ -34,7 +34,7 @@
         <span class="pull-right"><%= link_to gravatar_for(p.user, size: 20), p.user %></span>
       </li>
       <li class="list-group-item">
-        <%= link_to "コメント ", user_post_path(p.user, p) %> <%= content_tag(:span, "", class: "glyphicon glyphicon-comment") %>
+        <%= link_to "コメント ", post_path(p) %> <%= content_tag(:span, "", class: "glyphicon glyphicon-comment") %>
         <span class="badge pull-right"><%= p.comments.count %></span>
       </li>
     </ul>
@@ -45,7 +45,7 @@
       </div>
     <% end %>
     <% if signed_in? %>
-      <%= form_for(@comment, url: user_post_comments_path(current_user, p)) do |f| %>
+      <%= form_for(@comment, url: post_comments_path(p)) do |f| %>
         <%= render "comments/fields", f: f %>
         <div class="form-group pull-right">
           <%= gravatar_for current_user, size: 30 %>

@@ -4,7 +4,6 @@
 	var Post = Backbone.Model.extend({
 		idAttribute: "id",
 		defaults: {
-			"user_id": 1,
 			"title": "",
 			"body": ""
 		},
@@ -17,7 +16,7 @@
 	
 	var PostList = Backbone.Collection.extend({
 		model: Post,
-		url: "../api/users/1/posts" // Collectionに格納する場合はモデルのurl設定は不要
+		url: "../api/posts" // Collectionに格納する場合はモデルのurl設定は不要
 	});
 	
 	var ItemView = Backbone.View.extend({
@@ -82,7 +81,11 @@
 			this.$body.val('');
 		},
 		onAdd: function () {
-			this.collection.create({title: this.$title.val(), body: this.$body.val()}, {wait: true});
+			this.collection.create({title: this.$title.val(), body: this.$body.val()}, {
+	            headers:{
+	                //"Authorization":'Basic ' + btoa("eeb672c1077457e706413edada9a3f2f6bf28cf2:")
+	            	"Authorization":"4885fe49032a3af91fd6cedb5a2f850629aa778c"
+	            }, wait: true }  );
 			this.render();
 		}
 	});

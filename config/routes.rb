@@ -2,18 +2,17 @@ Holmon::Application.routes.draw do
   
   namespace :api, defaults: {format: 'json'}  do
     resources :sessions, only: [:new, :create, :destroy]
-    resources :users, except: [:new] do
-      resources :posts do
-        get "image" => :image, on: :member
-        patch "close" => :close, on: :member
-        resources :comments
-      end
-    end
+    resources :users 
     get "/users_list", to: "users#index"
+    resources :posts do
+      get "image" => :image, on: :member
+      patch "close" => :close, on: :member
+    end
+    resources :comments
   end
   
-  resources :users, except: [:new] do
-    resources :posts do
+  resources :users, except: [:new], shallow: true do
+    resources :posts, shallow: true do
       get "image" => :image, on: :member
       patch "close" => :close, on: :member
       resources :comments

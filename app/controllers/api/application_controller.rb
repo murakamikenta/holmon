@@ -10,13 +10,15 @@ class Api::ApplicationController < ActionController::Base
   class Unauthorized < StandardError; end
   class PermissionDenied < StandardError; end
      
-  #rescue_from Exception,                   :with => :render_500
+  rescue_from Exception,                   :with => :render_500
   #rescue_from ActiveRecord::RecordInvalid, :with => :render_422
-  #rescue_from ActionController::RoutingError, ActiveRecord::RecordNotFound, ActionController::UnknownController, 
-  #  AbstractController::ActionNotFound,    :with => :render_404
-  #rescue_from PermissionDenied,            :with => :render_403
-  #rescue_from Unauthorized,                :with => :render_401
-  #rescue_from BadRequest,                  :with => :render_400
+  rescue_from ActionController::RoutingError, ActiveRecord::RecordNotFound, ActionController::UnknownController, 
+    AbstractController::ActionNotFound,    :with => :render_404
+  rescue_from PermissionDenied,            :with => :render_403
+  rescue_from Unauthorized,                :with => :render_401
+  rescue_from BadRequest,                  :with => :render_400
+  
+ 
 
   protected
 
@@ -53,4 +55,13 @@ class Api::ApplicationController < ActionController::Base
   def render_500(exception = nil)
     render_ng(500, [$!.message])
   end
+  
+  private
+    def authenticate_user
+      user = User.find_by(access_token: request.headers["Authorization"])
+      logger.info "request.headers: #{request.headers['Authorization']}"
+      unless user
+        raise Unauthorized
+      end
+    end
 end
